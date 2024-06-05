@@ -63,6 +63,9 @@ type
     property PythonEngine: TPythonEngine read FPythonEngine;
   end;
 
+var
+  CreateExternalModules: procedure(PyEngine: TPythonEngine) = nil;
+
 implementation
 
 uses
@@ -157,6 +160,8 @@ begin
   CreatePythonEngine;
   CreateDebugIDE;
   CreateFPyscripterModule;
+  if assigned(CreateExternalModules) then
+    CreateExternalModules(PythonEngine);
 end;
 
 procedure TInternalPython.CreatePythonEngine;
